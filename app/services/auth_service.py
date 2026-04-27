@@ -10,7 +10,7 @@ from app.errors.errors import AppError, ErrorCode
 from dotenv import load_dotenv
 import os
 
-from ..schemas.auth_schemas import LoginRequest, RegisterRequest
+from ..schemas.auth_schema import LoginRequest, RegisterRequest
 
 load_dotenv()
 

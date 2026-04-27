@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 from app.models.user import User
 from app.errors.errors import AppError, ErrorCode
 from app.utils.security import hash_password, verify_password
-from app.schemas.user_schemas import UpdateUserRequest
+from app.schemas.user_schema import UpdateUserRequest
 
 
 def update_user(current_user: User, db: Session, data: UpdateUserRequest):

@@ -1,4 +1,3 @@
-# repositories/user_repository.py
 from app.models.user import User
 from sqlalchemy.orm import Session
 

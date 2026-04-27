@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI
 from dotenv import load_dotenv
 
-from app.routes import auth_routes, user_routes
+from app.routes import activity_routes, auth_routes, user_routes
 
 from .database import Base, engine
 
@@ -31,6 +31,7 @@ if RUN_MIGRATIONS:
 
 app.include_router(auth_routes.router)
 app.include_router(user_routes.router)
+app.include_router(activity_routes.router)
 
 # register handlers
 app.add_exception_handler(AppError, app_error_handler)
