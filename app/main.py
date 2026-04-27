@@ -2,16 +2,18 @@ import os
 from fastapi import FastAPI
 from dotenv import load_dotenv
 
+from app.routes import auth_routes, user_routes
+
 from .database import Base, engine
-from .routes import router
+
 
 from fastapi.exceptions import RequestValidationError
-from .error_handlers import (
+from .errors.error_handlers import (
     validation_exception_handler,
     app_error_handler,
     global_exception_handler
 )
-from .errors import AppError
+from .errors.errors import AppError
 
 load_dotenv()
 
@@ -22,7 +24,8 @@ app = FastAPI()
 if RUN_MIGRATIONS:
     Base.metadata.create_all(bind=engine)
 
-app.include_router(router)
+app.include_router(auth_routes.router)
+app.include_router(user_routes.router)
 
 # register handlers
 app.add_exception_handler(AppError, app_error_handler)

@@ -4,13 +4,13 @@ from sqlalchemy.exc import IntegrityError
 
 from app.models.user import User
 
-from .security import hash_password, verify_password, create_access_token
-from .errors import AppError, ErrorCode
+from app.utils.security import hash_password, verify_password, create_access_token
+from app.errors.errors import AppError, ErrorCode
 
 from dotenv import load_dotenv
 import os
 
-from .schemas import LoginRequest, RegisterRequest
+from ..schemas.auth_schemas import LoginRequest, RegisterRequest
 
 load_dotenv()
 

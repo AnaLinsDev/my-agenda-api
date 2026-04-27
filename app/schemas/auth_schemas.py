@@ -1,6 +1,4 @@
 from pydantic import BaseModel, EmailStr, StringConstraints, Field
-from typing import Annotated
-
 
 class RegisterRequest(BaseModel):
     email: EmailStr
