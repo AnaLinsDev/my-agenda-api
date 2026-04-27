@@ -19,7 +19,12 @@ load_dotenv()
 
 RUN_MIGRATIONS = os.getenv("RUN_MIGRATIONS", "false").lower() == "true"
 
-app = FastAPI()
+app = FastAPI(
+    openapi_tags=[
+        {"name": "Auth", "description": "Authentication endpoints"},
+        {"name": "Users", "description": "User management"},
+    ]
+)
 
 if RUN_MIGRATIONS:
     Base.metadata.create_all(bind=engine)

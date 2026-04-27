@@ -5,7 +5,10 @@ from ..services.auth_services import login_user, register_user
 from ..schemas.auth_schemas import AuthResponse, LoginRequest, RegisterRequest
 from ..database import get_db
 
-router = APIRouter(prefix="/auth")
+router = APIRouter(
+    prefix="/auth",
+    tags=["Auth"]
+)
 
 
 # Auth Register
