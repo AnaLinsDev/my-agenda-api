@@ -1,0 +1,47 @@
+from .errors import ErrorCode
+
+
+ERROR_MAP = {
+    # AUTH
+    ErrorCode.INVALID_CREDENTIALS: {
+        "status": 401,
+        "message": "Invalid credentials",
+    },
+    ErrorCode.NOT_AUTHENTICATED: {
+        "status": 401,
+        "message": "Not authenticated",
+    },
+    ErrorCode.INVALID_TOKEN: {
+        "status": 401,
+        "message": "Invalid token",
+    },
+    ErrorCode.INVALID_CURRENT_PASSWORD: {
+        "status": 400,
+        "message": "Invalid current password field",
+    },
+
+
+    # USER
+    ErrorCode.USER_NOT_FOUND: {
+        "status": 404,
+        "message": "User not found",
+    },
+    ErrorCode.USER_ALREADY_EXISTS: {
+        "status": 409,
+        "message": "User with the email or username already exists",
+    },
+    ErrorCode.EMAIL_ALREADY_EXISTS: {
+        "status": 409,
+        "message": "Email already being used",
+    },
+
+    # DEFAULT
+    ErrorCode.NOT_FOUND: {
+        "status": 404,
+        "message": "Resource not found",
+    },
+    ErrorCode.FORBIDDEN: {
+        "status": 403,
+        "message": "Username already being used",
+    },
+}

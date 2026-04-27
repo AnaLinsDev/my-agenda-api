@@ -1,0 +1,60 @@
+from sqlalchemy.orm import Session
+from fastapi import Response
+from sqlalchemy.exc import IntegrityError
+
+from app.models.user import User
+
+from .security import hash_password, verify_password, create_access_token
+from .errors import AppError, ErrorCode
+
+from dotenv import load_dotenv
+import os
+
+from .schemas import LoginRequest, RegisterRequest
+
+load_dotenv()
+
+NODE_ENV = os.getenv("NODE_ENV")
+
+
+def register_user(db: Session, data: RegisterRequest):
+
+    user = User(
+        email=data.email,
+        password=hash_password(data.password),
+    )
+
+    try:
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+        return user
+    except IntegrityError as e:
+        db.rollback()
+
+        error_str = str(e.orig).lower()
+
+        if "email" in error_str:
+            raise AppError(ErrorCode.EMAIL_ALREADY_EXISTS)
+
+        raise AppError(ErrorCode.USER_ALREADY_EXISTS)
+
+
+def login_user(db: Session, response: Response, data: LoginRequest):
+    user = db.query(User).filter(User.email == data.email).first()
+
+    if not user or not verify_password(data.password, user.password):
+        raise AppError(ErrorCode.INVALID_CREDENTIALS)
+
+    token = create_access_token({"sub": str(user.id)})
+
+    response.set_cookie(
+        key="access_token",
+        value=token,
+        httponly=True,
+        secure=NODE_ENV == "prod",
+        samesite="lax",
+        max_age=60 * 60 * 24,  # 1 day
+    )
+
+    return user

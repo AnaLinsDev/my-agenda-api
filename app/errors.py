@@ -1,0 +1,23 @@
+from enum import Enum
+
+
+class ErrorCode(str, Enum):
+    # AUTH
+    INVALID_CREDENTIALS = "INVALID_CREDENTIALS"
+    NOT_AUTHENTICATED = "NOT_AUTHENTICATED"
+    INVALID_TOKEN = "INVALID_TOKEN"
+    INVALID_CURRENT_PASSWORD = "INVALID_CURRENT_PASSWORD"
+
+    # USER
+    USER_NOT_FOUND = "USER_NOT_FOUND"
+    USER_ALREADY_EXISTS = "USER_ALREADY_EXISTS"
+    EMAIL_ALREADY_EXISTS = "EMAIL_ALREADY_EXISTS"
+
+    # DEFAULT
+    NOT_FOUND = "NOT_FOUND"
+    FORBIDDEN = "FORBIDDEN"
+
+
+class AppError(Exception):
+    def __init__(self, code: ErrorCode):
+        self.code = code
