@@ -12,13 +12,10 @@ router = APIRouter(prefix="/activities", tags=["Activities"])
 # Activity List
 @router.get("/", response_model=list[Activity])
 def get_all(
-    week_start: str | None = Query(None, description="YYYY-MM-DD"),
+    week_start: str = Query(..., description="YYYY-MM-DD"),
     db: Session = Depends(get_db),
     user_id: str = Depends(get_current_user_id)
 ):
-    if not week_start:
-        raise HTTPException(status_code=400, detail="Week start date needed")
-
     start_date = datetime.strptime(week_start, "%Y-%m-%d")
     end_date = start_date + timedelta(days=6)
 
@@ -46,12 +43,7 @@ def update(
     db: Session = Depends(get_db),
     user_id: str = Depends(get_current_user_id)
 ):
-    updated = activity_service.update_activity(db, id, activity, user_id)
-
-    if not updated:
-        raise HTTPException(status_code=404, detail="Activity not found")
-
-    return updated
+    return activity_service.update_activity(db, id, activity, user_id)
 
 # Delete the Activity
 @router.delete("/{id}")
@@ -60,9 +52,6 @@ def delete(
     db: Session = Depends(get_db),
     user_id: str = Depends(get_current_user_id)
 ):
-    deleted = activity_service.delete_activity(db, id, user_id)
-
-    if not deleted:
-        raise HTTPException(status_code=404, detail="Activity not found")
+    activity_service.delete_activity(db, id, user_id)
 
     return {"message": "Deleted successfully"}

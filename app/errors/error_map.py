@@ -35,6 +35,12 @@ ERROR_MAP = {
         "message": "Email already being used",
     },
 
+    #ACTIVITY
+    ErrorCode.ACTIVITY_NOT_FOUND: {
+        "status": 404,
+        "message": "Activity not found",
+    },
+
     # DEFAULT
     ErrorCode.NOT_FOUND: {
         "status": 404,
