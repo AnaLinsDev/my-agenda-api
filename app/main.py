@@ -29,6 +29,7 @@ app = FastAPI(
     openapi_tags=[
         {"name": "Auth", "description": "Authentication endpoints"},
         {"name": "Users", "description": "User management"},
+        {"name": "Activities", "description": "Activity management"},
     ]
 )
 
