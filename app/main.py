@@ -1,9 +1,9 @@
 import os
 from fastapi import FastAPI
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes import activity_routes, auth_routes, user_routes
-
 from .database import Base, engine
 
 
@@ -14,6 +14,8 @@ from .errors.error_handlers import (
     global_exception_handler
 )
 from .errors.errors import AppError
+
+CLIENT_URL = os.getenv("CLIENT_URL")
 
 load_dotenv()
 
@@ -32,6 +34,15 @@ if RUN_MIGRATIONS:
 app.include_router(auth_routes.router)
 app.include_router(user_routes.router)
 app.include_router(activity_routes.router)
+
+# middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[CLIENT_URL],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # register handlers
 app.add_exception_handler(AppError, app_error_handler)

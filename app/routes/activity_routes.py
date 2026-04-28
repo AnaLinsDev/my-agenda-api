@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
+from typing import Optional
 
 from app.database import get_db
 from app.dependencies.auth import get_current_user_id
@@ -13,6 +14,8 @@ router = APIRouter(prefix="/activities", tags=["Activities"])
 @router.get("/", response_model=list[Activity])
 def get_all(
     week_start: str = Query(..., description="YYYY-MM-DD"),
+    category: Optional[str] = Query(None),
+    completed: Optional[bool] = Query(None),
     db: Session = Depends(get_db),
     user_id: str = Depends(get_current_user_id)
 ):
@@ -23,7 +26,9 @@ def get_all(
         db,
         start_date.strftime("%Y-%m-%d"),
         end_date.strftime("%Y-%m-%d"),
-        user_id
+        user_id,
+        category=category,
+        completed=completed,
     )
 
 # Create new Activity

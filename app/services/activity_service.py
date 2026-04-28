@@ -3,8 +3,18 @@ from app.models.activity import Activity
 from app.repository import activity_repository
 from app.errors.errors import AppError, ErrorCode
 
-def get_activities_by_week(db, start_date: str, end_date: str, user_id: str):
-    return activity_repository.get_by_date_range(db, start_date, end_date, user_id)
+def get_activities_by_week(db, 
+                            start_date: str, 
+                            end_date: str, 
+                            user_id: str,
+                            category: str | None = None,
+                            completed: bool | None = None):
+    return activity_repository.get_by_date_range(db, 
+                                                 start_date, 
+                                                 end_date, 
+                                                 user_id, 
+                                                 category, 
+                                                 completed)
 
 def add_activity(db: Session, activity_data, user_id: str):
     activity = Activity(**activity_data.dict())
