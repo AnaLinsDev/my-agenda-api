@@ -21,7 +21,11 @@ load_dotenv()
 
 RUN_MIGRATIONS = os.getenv("RUN_MIGRATIONS", "false").lower() == "true"
 
+is_prod = os.getenv("NODE_ENV") == "prod"
+
 app = FastAPI(
+    docs_url=None if is_prod else "/docs",
+    redoc_url=None if is_prod else "/redoc",
     openapi_tags=[
         {"name": "Auth", "description": "Authentication endpoints"},
         {"name": "Users", "description": "User management"},
