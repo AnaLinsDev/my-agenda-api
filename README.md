@@ -3,6 +3,8 @@
 <p>
   A modern, personal agenda API built with FastAPI, JWT, cookies and PostgreSQL. 
 
+  The API manage the user auth using mainly cookies, also manage the user activities, allowing them to create, edit, delete and also list the activities filtered by week, category or status.
+
   The frontend repository of this app can be found <a href="https://github.com/AnaLinsDev/my-agenda-app">HERE</a> .
 </p>
 
