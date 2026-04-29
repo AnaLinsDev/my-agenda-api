@@ -43,7 +43,7 @@ app.include_router(activity_routes.router)
 # middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[CLIENT_URL] if CLIENT_URL else ["*"],
+    allow_origins=[CLIENT_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
