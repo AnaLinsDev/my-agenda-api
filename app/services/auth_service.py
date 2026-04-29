@@ -53,7 +53,7 @@ def login_user(db: Session, response: Response, data: LoginRequest):
         value=token,
         httponly=True,
         secure=ENV == "prod",
-        samesite="lax",
+        samesite="none",       # "lax" se textar local
         max_age=60 * 60 * 24,  # 1 day
     )
 
