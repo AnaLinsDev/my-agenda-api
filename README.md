@@ -1,8 +1,23 @@
-# My Agenda API (FastAPI + SQLAlchemy + Alembic)
+# MyAgenda App
 
-API para gerenciamento da aplicação my-agenda-app
-Link do repositório frontend: https://github.com/AnaLinsDev/my-agenda-app
----
+<p>
+  A modern, personal agenda built with React and React Router, designed to deliver a real-world productivity experience. 
+  
+  The application features an interactive calendar with day and week views, allowing users to create, organize, and manage activities with categories, color-coding, filtering, all enhanced by responsive design, dark/light mode, and subtle animations. 
+
+  The frontend repository of this app can be found <a href="https://github.com/AnaLinsDev/my-agenda-app">HERE</a> .
+</p>
+
+<hr />
+
+## Features
+- Auth - Sign in, sign up and logout user using cookies
+- List user tasks filtered by week, category or completed
+- Create new task
+- Edit task by Id
+- Delete task by Id
+
+<hr />
 
 ## 📦 Requisitos
 
