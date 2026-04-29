@@ -1,12 +1,22 @@
-# MyAgenda App
+# MyAgenda API
 
 <p>
-  A modern, personal agenda built with React and React Router, designed to deliver a real-world productivity experience. 
-  
-  The application features an interactive calendar with day and week views, allowing users to create, organize, and manage activities with categories, color-coding, filtering, all enhanced by responsive design, dark/light mode, and subtle animations. 
+  A modern, personal agenda API built with FastAPI, JWT, cookies and PostgreSQL. 
 
   The frontend repository of this app can be found <a href="https://github.com/AnaLinsDev/my-agenda-app">HERE</a> .
 </p>
+
+<hr />
+
+## Technologies
+- fastapi 
+- sqlalchemy
+- pydantic 
+- alembic
+- bcrypt    
+- passlib
+- python-jose
+
 
 <hr />
 
