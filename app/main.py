@@ -15,13 +15,13 @@ from .errors.error_handlers import (
 )
 from .errors.errors import AppError
 
-CLIENT_URL = os.getenv("CLIENT_URL")
-
 load_dotenv()
+
+CLIENT_URL = os.getenv("CLIENT_URL")
 
 RUN_MIGRATIONS = os.getenv("RUN_MIGRATIONS", "false").lower() == "true"
 
-is_prod = os.getenv("NODE_ENV") == "prod"
+is_prod = os.getenv("ENV") == "prod"
 
 app = FastAPI(
     docs_url=None if is_prod else "/docs",
@@ -43,7 +43,7 @@ app.include_router(activity_routes.router)
 # middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[CLIENT_URL],
+    allow_origins=[CLIENT_URL] if CLIENT_URL else ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

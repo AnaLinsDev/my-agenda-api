@@ -14,7 +14,7 @@ from ..schemas.auth_schema import LoginRequest, RegisterRequest
 
 load_dotenv()
 
-NODE_ENV = os.getenv("NODE_ENV")
+ENV = os.getenv("ENV")
 
 
 def register_user(db: Session, data: RegisterRequest):
@@ -52,7 +52,7 @@ def login_user(db: Session, response: Response, data: LoginRequest):
         key="access_token",
         value=token,
         httponly=True,
-        secure=NODE_ENV == "prod",
+        secure=ENV == "prod",
         samesite="lax",
         max_age=60 * 60 * 24,  # 1 day
     )

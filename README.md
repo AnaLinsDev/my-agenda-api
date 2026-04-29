@@ -31,7 +31,7 @@ Crie um arquivo `.env` na raiz do projeto:
 ```env
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/agenda_local"
 RUN_MIGRATIONS="false" # false (venv) ou true (docker)
-NODE_ENV="dev"
+ENV="dev"
 JWT_SECRET="my_jwt_secret_key"
 JWT_EXPIRES_IN="7d"
 ALGORITHM = "HS256"
