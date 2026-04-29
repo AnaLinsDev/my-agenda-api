@@ -6,6 +6,13 @@ from app.schemas.user_schema import UpdateUserRequest, UserResponse
 from app.dependencies.auth import get_current_user
 from app.services.user_service import update_user, delete_user
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+ENV = os.getenv("ENV")
+
 router = APIRouter(
     prefix="/users",
     tags=["Users"]
@@ -36,6 +43,15 @@ def delete(
 ):
     delete_user(current_user, db)
 
-    response.delete_cookie("access_token")
+    response.set_cookie(
+        key="access_token",
+        value="",
+        max_age=0,
+        expires=0,
+        httponly=True,
+        secure=ENV == "prod",
+        samesite="none" if ENV == "prod" else "lax",
+        path="/",
+    )
 
     return {"message": "User deleted successfully"}
